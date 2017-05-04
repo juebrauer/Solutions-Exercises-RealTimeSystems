@@ -21,5 +21,8 @@
     <ClCompile Include="TrafficSignRecognition1_START.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="TrafficSignRecognition3_with_Threads.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

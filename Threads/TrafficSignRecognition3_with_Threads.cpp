@@ -1,21 +1,29 @@
 /// Simple Speed Limit Assistant
+///
 /// using Template Matching Approach on Multiple Scales
+///
+/// and
+///
+/// multiple threads in order to distribute computation
+/// on multiple cores
 ///
 /// ---
 /// by Prof. Dr. Jürgen Brauer, www.juergenbrauer.org
 ///
+/// note regarding std::ref --> http://jakascorner.com/blog/2016/01/arguments.html
 
 #include "opencv2/opencv.hpp"
 #include <conio.h>
+#include <thread>   // for std:thread
 
 using namespace cv;
 using namespace std;
 
-#define MATCH_THRESHOLD 0.45
+#define MATCH_THRESHOLD 0.50
 
 
-bool search_template(Mat frame, Mat img_template, double template_scale,
-   Rect& found_rect, double& match_value, bool& found)
+void search_template(Mat frame, Mat img_template, double template_scale,
+                     Rect* found_rect, double* match_value, bool* found)
 {
    // 1. prepare scaled template
    Mat scaled_template;
@@ -26,7 +34,7 @@ bool search_template(Mat frame, Mat img_template, double template_scale,
    // 2. define search method
    int match_method = CV_TM_CCOEFF_NORMED; // the larger the value, the better
 
-                                           // 3. search scaled template
+   // 3. search scaled template
    Mat result;
    matchTemplate(frame, scaled_template, result, match_method);
    //imshow("result", result);
@@ -35,33 +43,33 @@ bool search_template(Mat frame, Mat img_template, double template_scale,
    double minVal, maxVal;
    Point minLoc, maxLoc;
    minMaxLoc(result, &minVal, &maxVal, &minLoc, &maxLoc);
-   found_rect = Rect(maxLoc, scaled_template.size());
-   match_value = maxVal;
+   *found_rect = Rect(maxLoc, scaled_template.size());
+   *match_value = maxVal;
 
    // 5. did we find it?
-   if (match_value >= MATCH_THRESHOLD)
-      found = true;
+   if (*match_value >= MATCH_THRESHOLD)
+      *found = true;
    else
-      found = false;
-
-   return found;
+      *found = false;
 
 } // search_template
-
 
 
 struct Detection {
    double   scale;
    Rect     found_rect;
-   double   match_value;
+   double   match_value;   
 };
 
 
 int main()
 {
-   string videofilename = "test_videos\\traffic_sign_speed_limit_60.mp4";
+   string videofilename1 = "test_videos\\traffic_sign_speed_limit_60.mp4";
+   string videofilename2 = "V:\\01_job\\12_datasets\\traffic_scenes\\speed_limit_60_sign\\speed_limit_60_appears_two_times_scene1.mp4";
+   string videofilename3 = "V:\\01_job\\12_datasets\\traffic_scenes\\speed_limit_60_sign\\speed_limit_60_appears_three_times_scene2.mp4";
    string template_filename = "test_videos\\template_speed_limit_60.png";
 
+   string videofilename = videofilename3;
    VideoCapture cap(videofilename);
    if (!cap.isOpened()) {
       printf("Error! Could not open video file %s\n", videofilename.c_str());
@@ -74,6 +82,7 @@ int main()
 
    double speed_limit = -1.0;
    char txt[100];
+   double WCET = -1.0;
    int img_save_counter = 0;
    while (true)
    {
@@ -91,39 +100,71 @@ int main()
 
 
       // 2. search for the "speed limit 60" sign
-      Rect found_rect;
-      double match_value;
-      bool found;
+      Rect found_rect[100];
+      double match_value[100];
+      bool found[100];
       clock_t tic, toc;
       double computation_time;
       vector<Detection> detections;
+      vector<thread*> my_threads;
 
       /// ----------------------------------------------------------------
       tic = clock();
       int thread_nr = 0;
-      
+      bool USE_MULTIPLE_THREADS = true;
       for (double scale = 0.2f; scale < 1.0f; scale += 0.1)
       {
-         search_template(frame, img_template, scale,
-                         found_rect, match_value, found);         
-         if (found)
+         if (USE_MULTIPLE_THREADS)
          {
-            Detection d;
-            d.scale = scale;
-            d.found_rect = found_rect;
-            d.match_value = match_value;
-            detections.push_back(d);
+            thread* t = new thread(search_template,
+               frame, img_template, scale,
+               &found_rect[thread_nr],
+               &match_value[thread_nr],
+               &found[thread_nr]
+               );
+            my_threads.push_back(t);
+         }
+         else
+         {
+            search_template(frame, img_template, scale,
+                            &found_rect[thread_nr],
+                            &match_value[thread_nr],
+                            &found[thread_nr]
+                           );
          }
          thread_nr++;
       }
-      
+
+      if (USE_MULTIPLE_THREADS)
+         for (int i = 0; i < thread_nr; i++)
+            my_threads[i]->join();
+
+      thread_nr = 0;
+      for (double scale = 0.2f; scale < 1.0f; scale += 0.1)
+      {
+         if (found[thread_nr])
+         {
+            Detection d;
+            d.scale = scale;
+            d.found_rect = found_rect[thread_nr];
+            d.match_value = match_value[thread_nr];            
+            detections.push_back( d );
+         }
+         thread_nr++;
+      }      
       toc = clock();
       computation_time = (double)(toc - tic) / CLOCKS_PER_SEC;
+
+      // found larger computation time than before?      
+      if ((WCET == -1) || (computation_time > WCET))
+      {
+         WCET = computation_time;
+      }
       /// ----------------------------------------------------------------
 
 
       // 3. show all detections
-      for (int i = 0; i<detections.size(); i++)
+      for (int i=0; i<detections.size(); i++)
       {
          Detection d = detections[i];
 
@@ -143,8 +184,11 @@ int main()
 
 
       // 4. show computation time needed
-      sprintf_s(txt, "Computation time: %.2f seconds (%.2f fps)",
-         computation_time, 1.0 / computation_time);
+      sprintf_s(txt, "Computation time: %.2f sec (%.2f fps). WCET: %.2f sec (%.2f fps)",
+         computation_time,
+         1.0 / computation_time,
+         WCET,
+         1.0 / WCET);
       putText(frame,
          txt,
          Point(10, 40),
@@ -153,7 +197,7 @@ int main()
          1); // line thickness and type
 
 
-             // 5. show speed limit
+      // 5. show speed limit
       if (speed_limit == -1)
          sprintf_s(txt, "unknown speed limit");
       else
@@ -166,31 +210,34 @@ int main()
          1); // line thickness and type
 
 
-             // 5. show video frame with annotations
+      // 6. show video frame with annotations
       imshow("UKSLA (University of Applied Sciences Kempten Speed Limit Assistant) "
-         "by Prof. Dr. Jürgen Brauer", frame);
+             "by Prof. Dr. Jürgen Brauer", frame);
 
 
-      // 6. if speed limit found, wait for user key press,
+      // 7. if speed limit found, wait for user key press
       //    else continue with video
-      if (detections.size()==0)
+      if (detections.size() == 0)
          waitKey(1);
       else
-         waitKey(1);
+         //waitKey(0); // wait for keypress
+         waitKey(1);   // do not wait for keypress
 
 
-      int nr_times_to_write = 1;
-      if (detections.size() > 0)
-         nr_times_to_write = 40;
-
-      /*
-      for (int i = 0; i<nr_times_to_write; i++)
+      // 8. save detection images in order to create a video?
+      if (0)
       {
-         char fname[500];
-         sprintf_s(fname, "V:\\tmp\\img%04d.png", img_save_counter++);
-         imwrite(fname, frame);
+         int nr_times_to_write = 1;
+         if (detections.size() > 0)
+            nr_times_to_write = 40;
+
+         for (int i = 0; i < nr_times_to_write; i++)
+         {
+            char fname[500];
+            sprintf_s(fname, "V:\\tmp\\img%04d.png", img_save_counter++);
+            imwrite(fname, frame);
+         }
       }
-      */
 
    } // while (the video still has frames for us)
 
