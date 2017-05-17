@@ -5,6 +5,12 @@
 
 /// English: GCD = Greatest common divisor
 /// German : ggT = Größter gemeinsamer Teiler
+/// 
+/// --> GCD(12,18)
+/// --> GCD(18,12%18)=GCD(a,b)
+/// --> GCD(12,18%12)=GCD(a,b)
+/// --> GCD(6,12%6)=GCD(a,b)
+/// --> return a=6
 unsigned int GCD(unsigned int a, unsigned int b) {
 
   if (b == 0)
