@@ -120,8 +120,29 @@ int main()
     for (unsigned int i = 0; i < s.get_task_list().size(); i++)
       sprintf_s(tasks_waiting, "%s%d ", tasks_waiting, s.get_task_list()[i]->id);
 
+
+    // 5.5 is there any deadline violation?
+    for (unsigned int i = 0; i < s.get_task_list().size(); i++)
+    {
+       task* t1 = s.get_task_list()[i];
+       for (unsigned int j = 0; j < s.get_task_list().size(); j++)
+       {
+          task* t2 = s.get_task_list()[j];
+          if ((t1->id == t2->id) && (i != j))
+          {
+             cout << "\nDeadline of task " << t1->id << " was violated! --> simulation will cancel.\n";
+             printf("\a\a\a"); // beep, beep, beep
+             deadline_violation = true;
+             break;
+          }
+       } // for (j)
+
+       if (deadline_violation)
+          break;
+    } // for (i)
+
     
-    // 5.5 are there any tasks at all?
+    // 5.6 are there any tasks at all?
     if (s.get_task_list().size() > 0)
     {
 
@@ -176,31 +197,13 @@ int main()
     infos_per_timestep.push_back(info_str);
 
     
-    // 5.6 show history information
+    // 5.7 show history information
     cout << "\n";
     for (unsigned int i = 0; i < infos_per_timestep.size(); i++)
       cout << infos_per_timestep[i].c_str() << endl;
 
 
-    // 5.7 is there any deadline violation?
-    for (unsigned int i = 0; i < s.get_task_list().size(); i++)
-    {
-       task* t1 = s.get_task_list()[i];
-       for (unsigned int j = 0; j < s.get_task_list().size(); j++)
-       {
-          task* t2 = s.get_task_list()[j];
-          if ((t1->id == t2->id) && (i != j))
-          {
-             cout << "\nDeadline of task " << t1->id << " was violated! --> simulation will cancel.\n";
-             printf("\a\a\a"); // beep, beep, beep
-             deadline_violation = true;
-             break;
-          }
-       } // for (j)
-
-       if (deadline_violation)
-          break;
-    } // for (i)
+    
         
     // 5.8 wait for key press, then continue with next simulation step
     _getch();

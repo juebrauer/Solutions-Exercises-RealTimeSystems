@@ -23,7 +23,7 @@ int main()
   vector<string>  infos_per_timestep;
 
   // generate a RMS scheduler
-  int quantum = 10;
+  int quantum = 1;
   scheduler_rms s( quantum );
 
   // ask for number of tasks, execution times and periods
@@ -113,6 +113,29 @@ int main()
     for (unsigned int i = 0; i < s.get_task_list().size(); i++)
       sprintf_s(tasks_waiting, "%s%d ", tasks_waiting, s.get_task_list()[i]->id);
 
+
+    ////////////////////////
+    // deadline violation?
+    ////////////////////////
+    for (unsigned int i = 0; i < s.get_task_list().size(); i++)
+    {
+       task* t1 = s.get_task_list()[i];
+       for (unsigned int j = 0; j < s.get_task_list().size(); j++)
+       {
+          task* t2 = s.get_task_list()[j];
+          if ((t1->id == t2->id) && (i != j))
+          {
+             cout << "\nDeadline of task " << t1->id << " was violated! --> simulation will cancel.\n";
+             printf("\a\a\a"); // beep, beep, beep
+             deadline_violation = true;
+             break;
+          }
+       } // for (j)
+
+       if (deadline_violation)
+          break;
+    } // for (i)
+
     
     // are there any tasks at all?
     if (s.get_task_list().size() > 0)
@@ -173,30 +196,7 @@ int main()
     cout << "\n";
     for (unsigned int i = 0; i < infos_per_timestep.size(); i++)
       cout << infos_per_timestep[i].c_str() << endl;
-
-
-    ////////////////////////
-    // deadline violation?
-    ////////////////////////
-    for (unsigned int i = 0; i < s.get_task_list().size(); i++)
-    {
-       task* t1 = s.get_task_list()[i];
-       for (unsigned int j = 0; j < s.get_task_list().size(); j++)
-       {
-          task* t2 = s.get_task_list()[j];
-          if ((t1->id == t2->id) && (i != j))
-          {
-             cout << "\nDeadline of task " << t1->id << " was violated! --> simulation will cancel.\n";
-             printf("\a\a\a"); // beep, beep, beep
-             deadline_violation = true;
-             break;
-          }
-       } // for (j)
-
-       if (deadline_violation)
-          break;
-    } // for (i)
-        
+            
     _getch();
            
   } // while (continue scheduling simulation)
