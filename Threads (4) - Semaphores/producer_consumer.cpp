@@ -2,8 +2,8 @@
 ///
 /// note:
 ///  try out what happens without using
-///  semaphore fillCount or
-///  semaphore emptyCount!
+///  semaphore fillCount (-> hang up)
+///  semaphore emptyCount (-> sm will be filled and filled ...)
 ///
 /// ---
 /// by Prof. Dr.-Ing. Jürgen Brauer, www.juergenbrauer.org
@@ -33,12 +33,14 @@ void producer()
     emptyCount.P();
     useQueue.P();
     sm.push_back(i);
-    printf("produced data item '%d'\n", i);
+    printf("produced data item '%d'. List size is now %d\n",
+       i, (unsigned int)sm.size());
     useQueue.V();
     fillCount.V();
 
     i++;
     std::chrono::milliseconds duration( (rand() % 5)*100 );
+    //std::chrono::milliseconds duration(3000 + (rand() % 5) * 1000);
     this_thread::sleep_for(duration);
   }
 
@@ -53,11 +55,13 @@ void consumer()
     useQueue.P();
     int number = sm.front();
     sm.pop_front();
-    printf("consumed data item '%d'. List size is now %d\n", number, sm.size());
+    printf("consumed data item '%d'. List size is now %d\n",
+       number, (unsigned int)sm.size());
     useQueue.V();
     emptyCount.V();
 
     std::chrono::milliseconds duration(3000+(rand() % 5) * 1000);
+    //std::chrono::milliseconds duration( (rand() % 5)*100 );
     this_thread::sleep_for(duration);
   }
 }
