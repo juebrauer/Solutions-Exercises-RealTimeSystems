@@ -1,0 +1,141 @@
+/// Threads (5) - Deadlocks
+///
+/// The following code shall show you what a deadlock
+/// in the context of threads is.
+///
+/// For two threads T1 and T2, where each thread needs access to two
+/// ressources R1 and R2, we can accidently come to a situation
+/// in which e.g.
+/// T1 already holds ressource R1 and needs access to R2
+/// but
+/// T2 already holds ressource R2 and needs access to R1
+///
+/// So both threads will sleep() till the other ressource is free
+/// again, but this will never happen.
+/// This situation is called a deadlock.
+///
+///
+/// note:
+///  in T2() try the order
+///    mu1.lock(); mu2.lock(); // no deadlock
+///  then try the order
+///    mu2.lock(); mu1.lock(); // deadlock!
+///  
+///
+/// ---
+/// by Prof. Dr. Jürgen Brauer, www.juergenbrauer.org
+
+#include <iostream> // for std::cout
+#include <conio.h>  // for _getch()
+#include <thread>   // for std:thread
+#include <mutex>    // for std::mutex
+#include <vector>   // for std::vector
+
+using namespace std;
+
+mutex R1;
+mutex R2;
+mutex R3;
+
+vector<int> v1;
+vector<int> v2;
+vector<int> v3;
+
+const int N = 100;
+
+
+void T1()
+{
+  for (int i = 0; i < N; i++)
+  {
+    printf("T1: Trying to acquire resource R1...\n");
+    R1.lock();
+
+    printf("T1: Trying to acquire resource R2...\n");
+    R2.lock();
+
+    printf("T1: storing i=%d and i*i=%d\n", i, i*i);
+
+    v1.push_back(i);
+    v2.push_back(i*i);
+
+    printf("T1: Releasing mutex R2...\n");
+    R2.unlock();
+    printf("T1: Releasing mutex R1...\n");
+    R1.unlock();
+
+    std::chrono::milliseconds duration(1);
+    this_thread::sleep_for(duration);
+  }
+} // T1
+
+
+void T2()
+{
+   for (int i = 0; i < N; i++)
+   {
+      printf("T2: Trying to acquire resource R2...\n");
+      R2.lock();
+
+      printf("T2: Trying to acquire resource R3...\n");
+      R3.lock();
+
+      printf("T2: storing i=%d and i*i*i=%d\n", i, i*i*i);
+
+      v2.push_back(i);
+      v3.push_back(i*i*i);
+
+      printf("T2: Releasing mutex R3...\n");
+      R3.unlock();
+      printf("T2: Releasing mutex R2...\n");
+      R2.unlock();
+
+      std::chrono::milliseconds duration(1);
+      this_thread::sleep_for(duration);
+   }
+} // T2
+
+
+
+void T3()
+{
+   for (int i = 0; i < N; i++)
+   {
+      printf("T3: Trying to acquire resource R3...\n");
+      R3.lock();
+
+      printf("T3: Trying to acquire resource R1...\n");
+      R1.lock();
+
+      printf("T3: storing i=%d and i*i*i*i=%d\n", i, i*i*i*i);
+
+      v3.push_back(i);
+      v1.push_back(i*i*i*i);
+
+      printf("T3: Releasing mutex R1...\n");
+      R1.unlock();
+      printf("T3: Releasing mutex R3...\n");
+      R3.unlock();
+
+      std::chrono::milliseconds duration(1);
+      this_thread::sleep_for(duration);
+   }
+} // T3
+
+
+
+int main()
+{
+  const int nr_threads = 3;
+  std::thread* my_threads[nr_threads];
+  my_threads[0] = new thread(T1);
+  my_threads[1] = new thread(T2);
+  my_threads[2] = new thread(T3);
+  
+  cout << "Waiting for all threads to finish ..." << endl;
+  for (int i = 0; i < nr_threads; i++)
+    my_threads[i]->join();
+
+  cout << "End of deadlock demo reached." << endl;
+  _getch();
+}
