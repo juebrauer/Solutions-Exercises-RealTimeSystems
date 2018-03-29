@@ -22,6 +22,7 @@ using namespace std;
 #define NR_SAMPLES 2000
 
 int main() {
+    
   clock_t tic, toc;
   double result = 0;
   printf("\nPress a key to start!\n\n");
@@ -36,7 +37,7 @@ int main() {
       cout << "test_nr = " << test_nr << endl;
 
     // guess some random size for the memory block
-    int size_in_mb = (rand() % 1000) + 1; // 1-1000 MB
+    int size_in_mb = (rand() % 100) + 1; // 1-100 MB
 
     // measure how long it needs to allocate that memory
     tic = clock();    

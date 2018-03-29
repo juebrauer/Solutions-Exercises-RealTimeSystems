@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WCET", "WCET\WCET.vcxproj", "{1B64E143-28A1-4111-ACFF-32AF911DF34B}"
 EndProject
@@ -28,6 +28,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cyclic executive with schedule table", "Cyclic executive with schedule table\Cyclic executive with schedule table.vcxproj", "{B885E149-CE3C-43CE-9CF2-4FA66C7398BE}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Memory Allocation Times", "Memory Allocation Times\Memory Allocation Times.vcxproj", "{B0D5A7F8-2DF5-484F-8152-A9C0CA520ABC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Intro to CPP - Object List Simulator", "Intro to CPP - Object List Simulator\Intro to CPP - Object List Simulator.vcxproj", "{9CE94727-6C72-4131-AD95-05F40FBB651E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -141,8 +143,19 @@ Global
 		{B0D5A7F8-2DF5-484F-8152-A9C0CA520ABC}.Release|x64.Build.0 = Release|x64
 		{B0D5A7F8-2DF5-484F-8152-A9C0CA520ABC}.Release|x86.ActiveCfg = Release|Win32
 		{B0D5A7F8-2DF5-484F-8152-A9C0CA520ABC}.Release|x86.Build.0 = Release|Win32
+		{9CE94727-6C72-4131-AD95-05F40FBB651E}.Debug|x64.ActiveCfg = Debug|x64
+		{9CE94727-6C72-4131-AD95-05F40FBB651E}.Debug|x64.Build.0 = Debug|x64
+		{9CE94727-6C72-4131-AD95-05F40FBB651E}.Debug|x86.ActiveCfg = Debug|Win32
+		{9CE94727-6C72-4131-AD95-05F40FBB651E}.Debug|x86.Build.0 = Debug|Win32
+		{9CE94727-6C72-4131-AD95-05F40FBB651E}.Release|x64.ActiveCfg = Release|x64
+		{9CE94727-6C72-4131-AD95-05F40FBB651E}.Release|x64.Build.0 = Release|x64
+		{9CE94727-6C72-4131-AD95-05F40FBB651E}.Release|x86.ActiveCfg = Release|Win32
+		{9CE94727-6C72-4131-AD95-05F40FBB651E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B1532115-0C92-4C80-999B-E26FE7B59A83}
 	EndGlobalSection
 EndGlobal
