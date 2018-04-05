@@ -3,8 +3,8 @@
 #include <stdlib.h> // for rand()
 #include <time.h>   // for clock()
 
-#define ARRAY_SIZE 10000001
-#define NR_EXPS 10000000
+#define ARRAY_SIZE 10000000
+#define NR_EXPS    10000000
 
 int loop_counter;
 
