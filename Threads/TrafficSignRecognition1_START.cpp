@@ -53,6 +53,9 @@ bool search_template(Mat frame, Mat img_template, double template_scale,
 
 int main()
 {
+   printf("TrafficSignRecognition1\n");
+
+
    string videofilename = "test_videos\\traffic_sign_speed_limit_60.mp4";
    string template_filename = "test_videos\\template_speed_limit_60.png";
 

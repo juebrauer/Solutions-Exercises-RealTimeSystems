@@ -64,12 +64,14 @@ struct Detection {
 
 int main()
 {
+   printf("TrafficSignRecognition3\n");
+
    string videofilename1 = "test_videos\\traffic_sign_speed_limit_60.mp4";
    string videofilename2 = "V:\\01_job\\12_datasets\\traffic_scenes\\speed_limit_60_sign\\speed_limit_60_appears_two_times_scene1.mp4";
    string videofilename3 = "V:\\01_job\\12_datasets\\traffic_scenes\\speed_limit_60_sign\\speed_limit_60_appears_three_times_scene2.mp4";
    string template_filename = "test_videos\\template_speed_limit_60.png";
 
-   string videofilename = videofilename3;
+   string videofilename = videofilename1;
    VideoCapture cap(videofilename);
    if (!cap.isOpened()) {
       printf("Error! Could not open video file %s\n", videofilename.c_str());

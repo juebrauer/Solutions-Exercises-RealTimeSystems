@@ -15,10 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TrafficSignRecognition2_MultiScale.cpp">
+    <ClCompile Include="TrafficSignRecognition1_START.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TrafficSignRecognition1_START.cpp">
+    <ClCompile Include="TrafficSignRecognition2_MultiScale.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="TrafficSignRecognition3_with_Threads.cpp">

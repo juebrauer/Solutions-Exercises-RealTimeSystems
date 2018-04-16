@@ -59,6 +59,8 @@ struct Detection {
 
 int main()
 {
+   printf("TrafficSignRecognition2\n");
+
    string videofilename = "test_videos\\traffic_sign_speed_limit_60.mp4";
    string template_filename = "test_videos\\template_speed_limit_60.png";
 
@@ -171,7 +173,7 @@ int main()
          "by Prof. Dr. Jürgen Brauer", frame);
 
 
-      // 6. if speed limit found, wait for user key press,
+      // 6. if speed limit found, wait for user key press OR do not wait
       //    else continue with video
       if (detections.size()==0)
          waitKey(1);
