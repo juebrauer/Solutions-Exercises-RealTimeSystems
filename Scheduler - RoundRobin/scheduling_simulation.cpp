@@ -62,7 +62,7 @@ int main()
     s.show_status();
 
     // is the chosen task finished?
-    if (t->time_computed == t->time_needed)
+    if (t->time_computed >= t->time_needed)
     {
       cout << "Task with id=" << t->id << " is finished with its computation!" << endl;
 
