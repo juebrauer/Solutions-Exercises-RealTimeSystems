@@ -23,7 +23,7 @@ int main()
   vector<string>  infos_per_timestep;
 
   // generate a RMS scheduler
-  int quantum = 1;
+  int quantum = 10;
   scheduler_rms s( quantum );
 
   // ask for number of tasks, execution times and periods
@@ -58,7 +58,7 @@ int main()
      task* t = info_all_periodic_tasks[i];
      simulation_end_time = LCM(simulation_end_time, info_all_periodic_tasks[i]->period);
   }
-  printf("\nLCD of all tasks period lengths is %d. So I will simulate up to time=%d ms...\n",
+  printf("\nLCM of all tasks period lengths is %d. So I will simulate up to time=%d ms...\n",
      simulation_end_time, simulation_end_time);
 
 
