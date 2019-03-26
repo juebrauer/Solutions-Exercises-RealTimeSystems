@@ -34,11 +34,12 @@ int f2_called_counter = 0;
 /// computes i^3 for given i
 int f2(int i)
 {
-  mtx.lock();
-  int new_counter_value = f2_called_counter;
-  new_counter_value = new_counter_value + 1; // at this point t1 might be interrupted by t2!
-  f2_called_counter = new_counter_value;
-  mtx.unlock();
+  //mtx.lock();
+  //int new_counter_value = f2_called_counter;
+  //new_counter_value = new_counter_value + 1; // at this point t1 might be interrupted by t2!
+  //f2_called_counter = new_counter_value;
+   f2_called_counter++;
+  //mtx.unlock();
 
   return i*i*i;
 

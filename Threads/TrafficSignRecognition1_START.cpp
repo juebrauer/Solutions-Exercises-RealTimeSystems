@@ -149,7 +149,7 @@ int main()
       // 6. if speed limit found, wait for user key press,
       //    else continue with video
       if (!found)
-         waitKey(0);
+         waitKey(1);
       else
          waitKey(0);
       int nr_times_to_write = 1;

@@ -84,7 +84,7 @@ int main()
         printf("\n\nSimulation step: %d\n", ++sim_step);
 
         // 1. get number N of currently detected road users
-        int N = list_all_objects.size();
+        int N = (int)list_all_objects.size();
 
         // 2. generate a new object or delete one?
         int rnd_number = rand() % 2; // will be 0 or 1
@@ -104,7 +104,8 @@ int main()
         }
         else
         {
-            // delete road user         
+            // delete road user 
+
             int rnd_idx = rand() % N;
             RoadUser* r = list_all_objects[rnd_idx];
             list_all_objects.erase(list_all_objects.begin() + rnd_idx);
@@ -121,7 +122,7 @@ int main()
 
         // 4. wait for a key press
         printf("Press a key to continue.\n");
-        _getch();
+        _getwch();
 
     } // while
 

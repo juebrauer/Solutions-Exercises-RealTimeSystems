@@ -41,7 +41,7 @@ vector<int> v1;
 vector<int> v2;
 vector<int> v3;
 
-const int N = 100;
+const int N = 75;
 
 
 void T1()
@@ -64,8 +64,8 @@ void T1()
     printf("T1: Releasing mutex R1...\n");
     R1.unlock();
 
-    std::chrono::milliseconds duration(1);
-    this_thread::sleep_for(duration);
+    //std::chrono::milliseconds duration(1);
+    //this_thread::sleep_for(duration);
   }
 } // T1
 
@@ -79,6 +79,7 @@ void T2()
 
       printf("T2: Trying to acquire resource R3...\n");
       R3.lock();
+      //R1.lock();
 
       printf("T2: storing i=%d and i*i*i=%d\n", i, i*i*i);
 
@@ -87,11 +88,12 @@ void T2()
 
       printf("T2: Releasing mutex R3...\n");
       R3.unlock();
+      //R1.unlock();
       printf("T2: Releasing mutex R2...\n");
       R2.unlock();
 
-      std::chrono::milliseconds duration(1);
-      this_thread::sleep_for(duration);
+      //std::chrono::milliseconds duration(1);
+      //this_thread::sleep_for(duration);
    }
 } // T2
 
@@ -117,8 +119,8 @@ void T3()
       printf("T3: Releasing mutex R3...\n");
       R3.unlock();
 
-      std::chrono::milliseconds duration(1);
-      this_thread::sleep_for(duration);
+      //std::chrono::milliseconds duration(1);
+      //this_thread::sleep_for(duration);
    }
 } // T3
 

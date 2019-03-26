@@ -14,7 +14,7 @@
 
 #include "opencv2/opencv.hpp"
 #include <conio.h>
-#include <thread>   // for std:thread
+#include <thread>   // for std::thread
 
 using namespace cv;
 using namespace std;
@@ -156,6 +156,10 @@ int main()
       }      
       toc = clock();
       computation_time = (double)(toc - tic) / CLOCKS_PER_SEC;
+
+      // free memory not needed any longer
+      for (int i = 0; i < thread_nr; i++)
+          delete my_threads[i];
 
       // found larger computation time than before?      
       if ((WCET == -1) || (computation_time > WCET))

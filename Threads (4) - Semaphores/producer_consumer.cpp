@@ -40,7 +40,7 @@ void producer()
 
     i++;
     //std::chrono::milliseconds duration( (rand() % 5)*100 );
-    std::chrono::milliseconds duration(3000 + (rand() % 5) * 1000);
+    std::chrono::milliseconds duration(500);
     this_thread::sleep_for(duration);
   }
 
@@ -60,8 +60,8 @@ void consumer()
     useQueue.V();
     emptyCount.V();
 
-    //std::chrono::milliseconds duration(3000+(rand() % 5) * 1000);
-    std::chrono::milliseconds duration( (rand() % 5)*100 );
+    std::chrono::milliseconds duration(1000);
+    //std::chrono::milliseconds duration( (rand() % 5)*100 );
     this_thread::sleep_for(duration);
   }
 }
