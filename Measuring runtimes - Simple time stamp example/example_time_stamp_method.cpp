@@ -33,10 +33,7 @@ int main()
 {
 
    clock_t tic, toc;
-
-   // Try this in Release mode & not outputing result
-   // volatile double result = 0;
-      
+     
    double result = 0;
 
    printf("Press a key to start!\n\n");

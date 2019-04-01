@@ -41,6 +41,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Measuring runtimes - Differ
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Measuring runtimes - Example for profiling", "Measuring runtimes - Profiling example\profiling_example.vcxproj", "{50A3E6A0-F977-4EF0-AA65-B16D51F74D8A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Runtime Anomaly - BubbleSort", "Runtime Anomaly - BubbleSort\rts_runtime_anomaly.vcxproj", "{27D98B69-F2F8-4654-A11E-89367A5EE5DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -201,6 +203,14 @@ Global
 		{50A3E6A0-F977-4EF0-AA65-B16D51F74D8A}.Release|x64.Build.0 = Release|x64
 		{50A3E6A0-F977-4EF0-AA65-B16D51F74D8A}.Release|x86.ActiveCfg = Release|Win32
 		{50A3E6A0-F977-4EF0-AA65-B16D51F74D8A}.Release|x86.Build.0 = Release|Win32
+		{27D98B69-F2F8-4654-A11E-89367A5EE5DD}.Debug|x64.ActiveCfg = Debug|x64
+		{27D98B69-F2F8-4654-A11E-89367A5EE5DD}.Debug|x64.Build.0 = Debug|x64
+		{27D98B69-F2F8-4654-A11E-89367A5EE5DD}.Debug|x86.ActiveCfg = Debug|Win32
+		{27D98B69-F2F8-4654-A11E-89367A5EE5DD}.Debug|x86.Build.0 = Debug|Win32
+		{27D98B69-F2F8-4654-A11E-89367A5EE5DD}.Release|x64.ActiveCfg = Release|x64
+		{27D98B69-F2F8-4654-A11E-89367A5EE5DD}.Release|x64.Build.0 = Release|x64
+		{27D98B69-F2F8-4654-A11E-89367A5EE5DD}.Release|x86.ActiveCfg = Release|Win32
+		{27D98B69-F2F8-4654-A11E-89367A5EE5DD}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
