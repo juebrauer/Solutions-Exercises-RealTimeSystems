@@ -1,3 +1,9 @@
+// Shows another runtime anomaly
+//
+// First try case 1, then case 2
+// by commenting the corresponding lines
+//
+
 #include <stdio.h>  // for printf()
 #include <conio.h>  // for _getch()
 #include <stdlib.h> // for rand()
@@ -27,6 +33,7 @@ bool binary_search(const int A[], const int N, const int search_value)
 
       if (A[middle] == search_value)
       {
+         found_counter++;
          return true;
       }
       else
@@ -37,6 +44,9 @@ bool binary_search(const int A[], const int N, const int search_value)
    }
 
    bool found = (A[middle] == search_value);
+   if (found)
+      found_counter++;
+
    return found;
 
 } // binary_search
