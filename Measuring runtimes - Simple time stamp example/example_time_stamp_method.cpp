@@ -34,7 +34,7 @@ int main()
 
    clock_t tic, toc;
      
-   double result = 0;
+   volatile double result = 0;
 
    printf("Press a key to start!\n\n");
    _getch();
@@ -57,7 +57,7 @@ int main()
    printf("tic=%d, toc=%d --> Time elapsed for f3(): %f seconds\n",
        tic, toc, (double)(toc - tic) / CLOCKS_PER_SEC);
 
-   printf("\nResult = %f\n", result);
+   //printf("\nResult = %f\n", result);
       
    _getwch();
 

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WCET", "WCET\WCET.vcxproj", "{1B64E143-28A1-4111-ACFF-32AF911DF34B}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Traffic Sign Recognition", "Threads\Threads.vcxproj", "{45B232EB-3AD5-4A44-A099-404C65F7566E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Scheduler - RoundRobin", "Scheduler - RoundRobin\Scheduler - RoundRobin.vcxproj", "{97FF9479-E697-4095-9E67-9985FAD362AA}"
@@ -43,6 +41,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Measuring runtimes - Exampl
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Runtime Anomaly - BubbleSort", "Runtime Anomaly - BubbleSort\rts_runtime_anomaly.vcxproj", "{27D98B69-F2F8-4654-A11E-89367A5EE5DD}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Runtime Anomaly - Binary Search", "Runtime Anomaly - Binary Search\Runtime Anomaly - Binary Search.vcxproj", "{41447963-EB2F-4CCB-A456-BB9BBEC4E69F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,14 +51,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1B64E143-28A1-4111-ACFF-32AF911DF34B}.Debug|x64.ActiveCfg = Debug|x64
-		{1B64E143-28A1-4111-ACFF-32AF911DF34B}.Debug|x64.Build.0 = Debug|x64
-		{1B64E143-28A1-4111-ACFF-32AF911DF34B}.Debug|x86.ActiveCfg = Debug|Win32
-		{1B64E143-28A1-4111-ACFF-32AF911DF34B}.Debug|x86.Build.0 = Debug|Win32
-		{1B64E143-28A1-4111-ACFF-32AF911DF34B}.Release|x64.ActiveCfg = Release|x64
-		{1B64E143-28A1-4111-ACFF-32AF911DF34B}.Release|x64.Build.0 = Release|x64
-		{1B64E143-28A1-4111-ACFF-32AF911DF34B}.Release|x86.ActiveCfg = Release|Win32
-		{1B64E143-28A1-4111-ACFF-32AF911DF34B}.Release|x86.Build.0 = Release|Win32
 		{45B232EB-3AD5-4A44-A099-404C65F7566E}.Debug|x64.ActiveCfg = Debug|x64
 		{45B232EB-3AD5-4A44-A099-404C65F7566E}.Debug|x64.Build.0 = Debug|x64
 		{45B232EB-3AD5-4A44-A099-404C65F7566E}.Debug|x86.ActiveCfg = Debug|Win32
@@ -211,6 +203,14 @@ Global
 		{27D98B69-F2F8-4654-A11E-89367A5EE5DD}.Release|x64.Build.0 = Release|x64
 		{27D98B69-F2F8-4654-A11E-89367A5EE5DD}.Release|x86.ActiveCfg = Release|Win32
 		{27D98B69-F2F8-4654-A11E-89367A5EE5DD}.Release|x86.Build.0 = Release|Win32
+		{41447963-EB2F-4CCB-A456-BB9BBEC4E69F}.Debug|x64.ActiveCfg = Debug|x64
+		{41447963-EB2F-4CCB-A456-BB9BBEC4E69F}.Debug|x64.Build.0 = Debug|x64
+		{41447963-EB2F-4CCB-A456-BB9BBEC4E69F}.Debug|x86.ActiveCfg = Debug|Win32
+		{41447963-EB2F-4CCB-A456-BB9BBEC4E69F}.Debug|x86.Build.0 = Debug|Win32
+		{41447963-EB2F-4CCB-A456-BB9BBEC4E69F}.Release|x64.ActiveCfg = Release|x64
+		{41447963-EB2F-4CCB-A456-BB9BBEC4E69F}.Release|x64.Build.0 = Release|x64
+		{41447963-EB2F-4CCB-A456-BB9BBEC4E69F}.Release|x86.ActiveCfg = Release|Win32
+		{41447963-EB2F-4CCB-A456-BB9BBEC4E69F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -30,8 +30,7 @@ double f3()
 
 
 int main()
-{   
-    //double result = 0;
+{       
     volatile double result = 0;
 
     printf("Press a key to start!\n\n");
