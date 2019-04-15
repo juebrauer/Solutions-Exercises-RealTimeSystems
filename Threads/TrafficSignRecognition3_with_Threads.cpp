@@ -113,7 +113,7 @@ int main()
       /// ----------------------------------------------------------------
       tic = clock();
       int thread_nr = 0;
-      bool USE_MULTIPLE_THREADS = true;
+      bool USE_MULTIPLE_THREADS = false;
       for (double scale = 0.2f; scale < 1.0f; scale += 0.1)
       {
          if (USE_MULTIPLE_THREADS)
@@ -158,8 +158,9 @@ int main()
       computation_time = (double)(toc - tic) / CLOCKS_PER_SEC;
 
       // free memory not needed any longer
-      for (int i = 0; i < thread_nr; i++)
-          delete my_threads[i];
+      if (USE_MULTIPLE_THREADS)
+         for (int i = 0; i < thread_nr; i++)
+             delete my_threads[i];
 
       // found larger computation time than before?      
       if ((WCET == -1) || (computation_time > WCET))
