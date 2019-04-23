@@ -19,7 +19,7 @@
 #include <iostream>
 using namespace std;
 
-#define NR_SAMPLES 2000
+#define NR_SAMPLES 5000
 
 int main() {
     
@@ -28,7 +28,7 @@ int main() {
   printf("\nPress a key to start!\n\n");
   _getch();
   printf("Test started...\n\n");
-  ofstream o1( "alloc_and_free_times.txt" );
+  ofstream o1( "alloc_and_free_times.csv" );
   
   for (int test_nr = 0; test_nr < NR_SAMPLES; test_nr++) {
 
@@ -37,7 +37,7 @@ int main() {
       cout << "test_nr = " << test_nr << endl;
 
     // guess some random size for the memory block
-    int size_in_mb = (rand() % 100) + 1; // 1-100 MB
+    int size_in_mb = (rand() % 4000) + 1; // 1-4000 MB
 
     // measure how long it needs to allocate that memory
     tic = clock();    
