@@ -35,12 +35,15 @@ int main()
     cout << "\nSimulation time : " << simulation_time << endl;
     cout << "Quantum = " << quantum << endl;
 
+
+
     /////////////////////////////////////////////////////////////////
     // ask the scheduler to choose a task that shall be computed next
     int task_id = s.choose_next_task();
     /////////////////////////////////////////////////////////////////
 
 
+    
     // get that task
     task* t = s.get_task_with_id(task_id);
     
