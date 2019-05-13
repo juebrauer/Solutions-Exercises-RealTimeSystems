@@ -14,7 +14,9 @@ scheduler_rms::scheduler_rms(int quantum) : scheduler(quantum)
 }
 
 
-/// go through all tasks and choose the one
+/// go through all tasks
+/// that are currently there
+/// and choose the one
 /// with the highest priority to be executed next
 ///
 /// task priority := 1 / period time of task

@@ -157,7 +157,7 @@ int main()
     for (unsigned int i = 0; i < infos_per_timestep.size(); i++)
       cout << infos_per_timestep[i].c_str() << endl;
         
-    _getch();
+    _getwch();
            
   } // while (continue scheduling simulation)
   
@@ -165,6 +165,6 @@ int main()
   cin >> c;
 
   cout << "Simulation finished. Press key to exit." << endl;
-  _getch();
+  _getwch();
 
 } // main
