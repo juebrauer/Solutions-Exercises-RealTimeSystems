@@ -49,7 +49,7 @@ int main()
 
   s.schedulability_test(info_all_periodic_tasks);
 
-  // compute kgV of period times
+  // compute kgV (Least Common Multiple) of period times
   int simulation_end_time =
      LCM(info_all_periodic_tasks[0]->period, info_all_periodic_tasks[1]->period);
   for (int i = 2; i < nr_tasks; i++)
@@ -197,7 +197,7 @@ int main()
     for (unsigned int i = 0; i < infos_per_timestep.size(); i++)
       cout << infos_per_timestep[i].c_str() << endl;
             
-    _getch();
+    _getwch();
            
   } // while (continue scheduling simulation)
   

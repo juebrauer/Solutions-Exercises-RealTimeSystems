@@ -1,0 +1,25 @@
+scheduler base class constructor called.
+Rate Monotonic Scheduler (RMS) generated.
+
+Please enter number of tasks to schedule: 3
+
+        Enter execution time for task 0 in ms : 10
+        Enter period for task 0 in ms : 100
+
+        Enter execution time for task 1 in ms : 20
+        Enter period for task 1 in ms : 80
+
+        Enter execution time for task 2 in ms : 30
+        Enter period for task 2 in ms : 70
+
+Schedulability test:
+----------------------
+   CPU utilization u                     = 0.778571
+   limit for u for secure schedulability = 0.779763
+
+=> the specified set of 3 tasks ...
+... can be scheduled with a guarantee that all deadlines will be met =)
+
+LCM of all tasks period lengths is 2800. So I will simulate up to time=2800 ms...
+
+Press a key to start the simulation!

@@ -4,7 +4,7 @@
 
 
 /// English: GCD = Greatest common divisor
-/// German : ggT = Größter gemeinsamer Teiler
+/// German : ggT = größter gemeinsamer Teiler
 /// 
 /// --> GCD(12,18)
 /// --> GCD(18,12%18)=GCD(a,b)
@@ -23,7 +23,7 @@ unsigned int GCD(unsigned int a, unsigned int b) {
 
 
 /// English: LCM = Least Common Multiple
-/// German : kgV = Kleinstes Gemeinsames Vielfaches
+/// German : kgV = kleinstes gemeinsames Vielfaches
 unsigned int LCM(unsigned int a, unsigned int b) {
 
   return (a * b) / GCD(a, b);

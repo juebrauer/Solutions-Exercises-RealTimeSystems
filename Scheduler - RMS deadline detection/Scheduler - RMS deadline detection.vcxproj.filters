@@ -16,4 +16,7 @@
     <ClInclude Include="scheduler_rms.h" />
     <ClInclude Include="math_functions.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="demos.txt" />
+  </ItemGroup>
 </Project>
