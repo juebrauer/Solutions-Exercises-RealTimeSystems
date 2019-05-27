@@ -25,7 +25,7 @@ int main()
     vector<string>  infos_per_timestep;
 
     // generate a LLF scheduler
-    int quantum = 10;
+    int quantum = 1;
     scheduler_llf s(quantum);
 
     // randomly generate some tasks
@@ -228,13 +228,13 @@ int main()
 
 
       if (simulate_step_by_step)
-        _getch();
+        _getwch();
 
     } // while (continue scheduling simulation)
 
     cout << "LLF Simulation finished. Press key to start another one." << endl;
 
-    _getch();
+    _getwch();
 
   }
 

@@ -206,7 +206,7 @@ int main()
     
         
     // 5.8 wait for key press, then continue with next simulation step
-    _getch();
+    _getwch();
            
   } // while (continue scheduling simulation)
   
@@ -219,7 +219,7 @@ int main()
   else
      cout << ":) No deadline was violated\n";
   cout << "Press any key to exit." << endl;
-  _getch();
+  _getwch();
 
 
 } // main

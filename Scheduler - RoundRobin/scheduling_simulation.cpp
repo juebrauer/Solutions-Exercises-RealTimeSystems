@@ -76,7 +76,7 @@ int main()
     // time goes by ...
     simulation_time += computation_time;
 
-    _getch();
+    _getwch();
   }
 
   cout << "\n\nAll tasks finished their computation." << endl;

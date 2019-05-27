@@ -47,7 +47,7 @@ void scheduler::show_status()
   
   for (int i = 0; i < N; i++)
   {
-    printf("\tTask #%d : Time computed=%d, \tTotal time needed: %d, \tNext Deadline:%d \t old Laxity:%d\n",
+    printf("\tTask #%d : Time computed=%d, \tTotal time needed: %d, \tNext Deadline:%d \t Old Laxity:%d\n",
       all_tasks[i]->id,
       all_tasks[i]->time_computed,
       all_tasks[i]->time_needed,
@@ -55,6 +55,8 @@ void scheduler::show_status()
       all_tasks[i]->laxity
       );
   } // for (i)
+
+  printf("\nNote: Laxities are shown BEFORE chosen process was scheduled, i.e. these are old laxities.\n");
 
 }
 
