@@ -38,7 +38,7 @@ int f2(int i)
   //int new_counter_value = f2_called_counter;
   //new_counter_value = new_counter_value + 1; // at this point t1 might be interrupted by t2!
   //f2_called_counter = new_counter_value;
-   f2_called_counter++;
+  f2_called_counter++;
   //mtx.unlock();
 
   return i*i*i;

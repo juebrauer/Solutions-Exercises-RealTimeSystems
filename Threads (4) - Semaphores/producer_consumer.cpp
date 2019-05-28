@@ -31,16 +31,16 @@ void producer()
   while (true)
   {
     emptyCount.P();
-    useQueue.P();
-    sm.push_back(i);
-    printf("produced data item '%d'. List size is now %d\n",
-       i, (unsigned int)sm.size());
-    useQueue.V();
+      useQueue.P();
+         sm.push_back(i);
+            printf("produced data item '%d'. List size is now %d\n",
+                   i, (unsigned int)sm.size());
+      useQueue.V();
     fillCount.V();
 
     i++;
     //std::chrono::milliseconds duration( (rand() % 5)*100 );
-    std::chrono::milliseconds duration(500);
+    std::chrono::milliseconds duration(100);
     this_thread::sleep_for(duration);
   }
 
@@ -52,12 +52,12 @@ void consumer()
   while (true)
   {
     fillCount.P();
-    useQueue.P();
-    int number = sm.front();
-    sm.pop_front();
-    printf("consumed data item '%d'. List size is now %d\n",
-       number, (unsigned int)sm.size());
-    useQueue.V();
+      useQueue.P();
+         int number = sm.front();
+         sm.pop_front();
+         printf("consumed data item '%d'. List size is now %d\n",
+                number, (unsigned int)sm.size());
+      useQueue.V();
     emptyCount.V();
 
     std::chrono::milliseconds duration(1000);
@@ -70,11 +70,11 @@ void consumer()
 
 int main()
 {
-  const int nr_threads = 3;
+  const int nr_threads = 2;
   std::thread* my_threads[nr_threads];
   my_threads[0] = new thread( producer );
   my_threads[1] = new thread( consumer );
-  my_threads[2] = new thread( consumer );
+  //my_threads[2] = new thread( consumer );
 
   cout << "Waiting for all threads to finish ..." << endl;
   for (int i = 0; i < nr_threads; i++)
