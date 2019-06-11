@@ -35,11 +35,10 @@ using namespace std;
 
 mutex R1;
 mutex R2;
-mutex R3;
 
+// Shared ressources (shared memory):
 vector<int> v1;
 vector<int> v2;
-vector<int> v3;
 
 const int N = 75;
 
@@ -50,18 +49,20 @@ void T1()
   {
     printf("T1: Trying to acquire resource R1...\n");
     R1.lock();
+    printf("T1: got resource R1!\n");
 
-    printf("T1: Trying to acquire resource R2...\n");
-    R2.lock();
+       printf("T1: Trying to acquire resource R2...\n");
+       R2.lock();
+       printf("T1: got resource R2!\n");
 
-    printf("T1: storing i=%d and i*i=%d\n", i, i*i);
+          printf("T1: storing i=%d and i*i=%d\n", i, i*i);
+          v1.push_back(i);
+          v2.push_back(i*i);
 
-    v1.push_back(i);
-    v2.push_back(i*i);
+       printf("T1: Releasing resource R2...\n");
+       R2.unlock();
 
-    printf("T1: Releasing mutex R2...\n");
-    R2.unlock();
-    printf("T1: Releasing mutex R1...\n");
+    printf("T1: Releasing resource R1...\n");
     R1.unlock();
 
     //std::chrono::milliseconds duration(1);
@@ -76,20 +77,20 @@ void T2()
    {
       printf("T2: Trying to acquire resource R2...\n");
       R2.lock();
+      printf("T2: got resource R2!\n");
 
-      printf("T2: Trying to acquire resource R3...\n");
-      R3.lock();
-      //R1.lock();
+         printf("T2: Trying to acquire resource R1...\n");
+         R1.lock();
+         printf("T2: got resource R1!\n");
+      
+            printf("T2: storing i=%d and i*i=%d\n", i, i*i);
+            v1.push_back(i);
+            v2.push_back(i*i);
 
-      printf("T2: storing i=%d and i*i*i=%d\n", i, i*i*i);
+         printf("T2: Releasing resource R1...\n");
+         R1.unlock();
 
-      v2.push_back(i);
-      v3.push_back(i*i*i);
-
-      printf("T2: Releasing mutex R3...\n");
-      R3.unlock();
-      //R1.unlock();
-      printf("T2: Releasing mutex R2...\n");
+      printf("T2: Releasing resource R2...\n");
       R2.unlock();
 
       //std::chrono::milliseconds duration(1);
@@ -98,43 +99,14 @@ void T2()
 } // T2
 
 
-
-void T3()
-{
-   for (int i = 0; i < N; i++)
-   {
-      printf("T3: Trying to acquire resource R3...\n");
-      R3.lock();
-
-      printf("T3: Trying to acquire resource R1...\n");
-      R1.lock();
-
-      printf("T3: storing i=%d and i*i*i*i=%d\n", i, i*i*i*i);
-
-      v3.push_back(i);
-      v1.push_back(i*i*i*i);
-
-      printf("T3: Releasing mutex R1...\n");
-      R1.unlock();
-      printf("T3: Releasing mutex R3...\n");
-      R3.unlock();
-
-      //std::chrono::milliseconds duration(1);
-      //this_thread::sleep_for(duration);
-   }
-} // T3
-
-
-
 int main()
 {
-  const int nr_threads = 3;
+  const int nr_threads = 2;
   std::thread* my_threads[nr_threads];
   my_threads[0] = new thread(T1);
   my_threads[1] = new thread(T2);
-  my_threads[2] = new thread(T3);
-  
-  cout << "Waiting for all threads to finish ..." << endl;
+    
+  cout << "Waiting for all threads to finish ...\n\n";
   for (int i = 0; i < nr_threads; i++)
     my_threads[i]->join();
 
