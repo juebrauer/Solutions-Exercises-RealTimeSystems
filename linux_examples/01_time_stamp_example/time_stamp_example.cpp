@@ -1,7 +1,6 @@
-#include <iostream>
-#include <time.h>
-#include <stdio.h>
-#include <cmath>
+#include <iostream> // for cout
+#include <ctime>    // for clock()
+#include <cmath>    // for cos()
 
 
 double f1()
@@ -29,6 +28,16 @@ double f3()
 }
 
 
+void show_duration_info(clock_t tic, clock_t toc)
+{
+   double time_elapsed = (double)(toc - tic) / CLOCKS_PER_SEC;
+   std::cout << "tic=" << tic << 
+                " toc=" << toc <<
+                " --> time elpased=" << time_elapsed <<
+                " seconds" << std::endl;
+}
+
+
 int main()
 {
 
@@ -36,38 +45,30 @@ int main()
    double time_elapsed;
      
    // volatile double result = 0;
-   volatile double result = 0;
+   double result = 0;
 
    std::cout << "CLOCKS_PER_SEC=" << CLOCKS_PER_SEC << std::endl;
    std::cout << "Press enter to continue!" << std::endl;
    std::cin.ignore();
 
+
    tic = clock();
    result += f1();   
    toc = clock();
-   time_elapsed = (double)(toc - tic) / CLOCKS_PER_SEC;
-   std::cout << "tic=" << tic << 
-                " toc=" << toc <<
-                " --> time elpased=" << time_elapsed <<
-                " seconds" << std::endl;
+   show_duration_info(tic,toc);
+   
 
    tic = clock();
    result += f2();
    toc = clock();
-   time_elapsed = (double)(toc - tic) / CLOCKS_PER_SEC;
-   std::cout << "tic=" << tic << 
-                " toc=" << toc <<
-                " --> time elpased=" << time_elapsed <<
-                " seconds" << std::endl;
+   show_duration_info(tic,toc);
+
 
    tic = clock();
    result += f3();
    toc = clock();
-   time_elapsed = (double)(toc - tic) / CLOCKS_PER_SEC;
-   std::cout << "tic=" << tic << 
-                " toc=" << toc <<
-                " --> time elpased=" << time_elapsed <<
-                " seconds" << std::endl;
+   show_duration_info(tic,toc);
+
 
    //printf("\nResult = %f\n", result);
    
