@@ -1,3 +1,15 @@
+// Simple example for showing
+// how to measure code execution times
+// using the time stamp method
+//
+// Note:
+// First compile using
+//    g++ time_stamp_example.cpp -o time_stamp_example.out (without optimizations)
+// then using
+//   g++ -O3 time_stamp_example.cpp -o time_stamp_example.out (with all optimizations turned on)
+//   --> This will dramatically reduce execution time! Why? (then add "volatile" keyword before result)
+
+
 #include <iostream> // for cout
 #include <ctime>    // for clock()
 #include <cmath>    // for cos()
@@ -44,7 +56,6 @@ int main()
    clock_t tic, toc;
    double time_elapsed;
      
-   // volatile double result = 0;
    double result = 0;
 
    std::cout << "CLOCKS_PER_SEC=" << CLOCKS_PER_SEC << std::endl;
@@ -69,7 +80,6 @@ int main()
    toc = clock();
    show_duration_info(tic,toc);
 
-
-   //printf("\nResult = %f\n", result);
+   std::cout << "result=" << result << std::endl;
    
 } // end main 
