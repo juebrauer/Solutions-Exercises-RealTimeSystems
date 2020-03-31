@@ -1,6 +1,10 @@
 // Simple example for showing
 // how to measure code execution times
-// using the time stamp method
+// using the time stamp method.
+// For generating a time stamp we here use the
+// clock() function:
+//
+//    http://www.cplusplus.com/reference/ctime/clock/
 //
 // Note:
 //
