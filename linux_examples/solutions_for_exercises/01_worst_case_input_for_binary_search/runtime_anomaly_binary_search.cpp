@@ -1,8 +1,4 @@
 // Shows another runtime anomaly
-//
-// First try case 1, then case 2
-// by commenting the corresponding lines
-//
 
 #include <stdio.h>  // for printf()
 #include <stdlib.h> // for rand()
