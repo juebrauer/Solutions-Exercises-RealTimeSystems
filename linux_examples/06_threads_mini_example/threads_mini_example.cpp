@@ -7,6 +7,11 @@
 ///
 ///   g++ -pthread threads_mini_example.cpp -o threads_mini_example.out
 ///
+/// What does the "-pthread" flag mean?
+/// pthread
+///    Adds support for multithreading with the pthreads library. This
+///    option sets flags for both the preprocessor and linker.
+///
 /// ---
 /// by Prof. Dr.-Ing. J�rgen Brauer, www.juergenbrauer.org
 
@@ -21,7 +26,7 @@ using namespace std;
 void f1()
 {
   cout << "f1 function start" << endl;
-  for (int i = 1; i <= 10; i++)
+  for (int i = 1; i <= 100; i++)
   {
     printf("f1: loop i=%d \t--> %d^3 = %d\n", i, i, i*i*i);     
     std::chrono::milliseconds duration( 500 );
@@ -35,7 +40,7 @@ void f1()
 void f2(int start)
 {
   cout << "f2 function start" << endl;
-  for (int i = start; i < start+10; i++)
+  for (int i = start; i < start+100; i++)
   {
     printf("f2: loop i=%d \t--> sin(%d) = %.1f\n", i, i, sin(i));
     std::chrono::milliseconds duration( 1500 );
@@ -51,9 +56,9 @@ int main()
   std::thread t2(f2, 10);
   //std::thread t3(f2, 100);
 
-  cout << "Waiting for t1 and t2 to finish (to join with main thread)..." << endl;
+  //cout << "Waiting for t1 and t2 to finish (to join with main thread)..." << endl;
   t1.join();
   t2.join();
 
-  cout << "End of threads example reached." << endl;  
+  cout << "End of threads example reached." << endl;
 }
