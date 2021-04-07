@@ -4,7 +4,7 @@
 #include <time.h> 
 
 
-#define N 10000 
+#define N 20000 
 int numbers[N];
 
 
@@ -16,7 +16,12 @@ void generate_random_numbers() {
 void generate_worst_case_order() {
     for (int i = 0; i < N; i++)
         numbers[i] = N-i;
+        // numbers[0] = 10000 = N
+        // numbers[1] = 9999  = N-1
+        // numbers[2] = 9998  = N-2
+        // ...
 }
+
 
 void S() {
     int counter_swaps = 0;
@@ -39,13 +44,15 @@ void S() {
 int main() {
     srand((unsigned int) time(NULL));
     
+    double WCET = 0.0;
+
     for (int test_run=1; test_run<=5; test_run++)
     {
         std::cout << "\nTest run #" << test_run << std::endl;
 
         // 1. generate an array with numbers to be sorted
-        generate_random_numbers();
-        //generate_worst_case_order();
+        //generate_random_numbers();
+        generate_worst_case_order();
 
         // 2. sort the array and
         //    use the time stamp method in order to
@@ -57,8 +64,13 @@ int main() {
 
         // 3. show CPU time needed to sort the array
         double computation_time = (double)(toc - tic) / CLOCKS_PER_SEC;
-        std::cout << "Time needed: " << computation_time << std::endl;
+        std::cout << "Time needed: " << computation_time << "sec" << std::endl;
+
+        if (computation_time > WCET)
+            WCET = computation_time;
     }
 
-    std::cout << "\nProgram end." << std::endl;
+    std::cout << "\n---\n";
+    std::cout << "WCET: " << WCET << "sec\n";
+    std::cout << "\nProgram end.\n";
 }
