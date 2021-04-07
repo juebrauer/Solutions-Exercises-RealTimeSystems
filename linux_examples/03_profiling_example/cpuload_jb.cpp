@@ -1,13 +1,15 @@
 #include <iostream> // for cout
 #include <cmath>    // for cos()
 
-#include "/home/juebrauer/link_to_vcd/tmp/gperftools-master/src/gperftools/profiler.h" // for speed profiling
+//include "/home/juebrauer/link_to_vcd/tmp/gperftools-master/src/gperftools/profiler.h" // for speed profiling
+
+#define HOW_OFTEN 1e7
 
 
 double f1()
 {
    double result = 0.0;
-   for (int i = 0; i < 1e3; i++)
+   for (int i = 0; i < HOW_OFTEN; i++)
       result += cos(i);
    return result;
 }
@@ -15,7 +17,7 @@ double f1()
 double f2()
 {
    double result = 0.0;
-   for (int i = 0; i < 1e4; i++)
+   for (int i = 0; i < HOW_OFTEN; i++)
       result += cos(i);
    return result;
 }
@@ -23,27 +25,28 @@ double f2()
 double f3()
 {
    double result = 0.0;
-   for (int i = 0; i < 1e5; i++)
+   for (int i = 0; i < HOW_OFTEN; i++)
       result += cos(i);
    return result;
 }
 
 
-double f4_1()
+double b()
 {
     return 3.14159;
 }
 
-double f4_2()
+double a()
 {
-    return exp(3.14159);
+    return b();
 }
 
 double f4()
-{
-    double x;
-    x = f4_1() + f4_2();
-    return x;
+{    
+   double result = 0.0;
+   for (int i = 0; i < HOW_OFTEN; i++)
+      result += a();
+   return result;
 }
 
 
@@ -54,7 +57,7 @@ int main()
 
    // ProfilerStart("profile.log");
 
-   for (int i=1; i<=5; i++)
+   for (int i=1; i<=10; i++)
    {
      result += f1();   
      result += f2();
