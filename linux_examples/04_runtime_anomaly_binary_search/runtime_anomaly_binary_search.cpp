@@ -4,8 +4,8 @@
 #include <stdlib.h> // for rand()
 #include <time.h>   // for clock()
 
-const int ARRAY_SIZE = 1000000;
-const int NR_EXPS = 10000000;
+const int ARRAY_SIZE = 1e6;
+const int NR_EXPS = 1e7;
 
 int loop_counter;
 
@@ -115,17 +115,18 @@ int main()
    int value_that_is_not_in_array;
       
    printf("\n\nWorst Case Execution Runtime (WCET) test:\n");
-   printf("\nSearching for number %d in array\n", value_that_is_not_in_array);
+
+   // If we always search for the same number in the array
+      // that is not there, the processor will learn something...
+      // And this will speed up the execution!            
+     
    loop_counter = 0;
    found_counter = 0;
    tic = clock();
    for (int expnr = 0; expnr<NR_EXPS; expnr++)
-   {
-      // If we always search for the same number in the array
-      // that is not there, the processor will learn something...
-      // And this will speed up the execution!
-      search_value = A[0]-5;
-      //search_value = A[ARRAY_SIZE-1]+5;      
+   {      
+       search_value = A[0]-random() % 100;
+      //search_value = A[ARRAY_SIZE-1]+random() % 100;
       found_counter += binary_search(A, ARRAY_SIZE, value_that_is_not_in_array);
    }
    toc = clock();
