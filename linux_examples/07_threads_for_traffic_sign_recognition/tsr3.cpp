@@ -129,7 +129,7 @@ int main()
          }
          thread_nr++;
       }
-      //printf("Generated %d threads.\n", (int) my_threads.size() );
+      printf("Generated %d threads.\n", (int) my_threads.size() );
 
       if (USE_MULTIPLE_THREADS)
          for (int i = 0; i < thread_nr; i++)
