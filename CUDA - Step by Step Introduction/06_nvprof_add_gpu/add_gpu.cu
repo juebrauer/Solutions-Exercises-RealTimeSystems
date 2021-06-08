@@ -2,11 +2,20 @@
 #include <math.h>
 #include <stdio.h>
 
-const int VARIANT_NR = 3;
+
+// Note: for profiling use
+//  nvcc add_gpu.cu -o add_gpu
+//  sudo nvprof --unified-memory-profiling off ./add_gpu
+//
+// Hint: 
+// https://stackoverflow.com/questions/36970646/nvprof-not-picking-up-any-api-calls-or-kernels
+
+const int VARIANT_NR = 2;
 
 // Kernel function to add the elements of two arrays
 
 // Variant 1
+// SLOW!
 __global__
 void add1(int n, float *x, float *y)
 {
@@ -16,6 +25,7 @@ void add1(int n, float *x, float *y)
 
 
 // Variant 2
+// FAST!
 __global__
 void add2(int n, float *x, float *y)
 {
@@ -31,6 +41,7 @@ void add2(int n, float *x, float *y)
 
 
 // Variant 3
+// FAST!
 __global__
 void add3(int n, float *x, float *y)
 {
